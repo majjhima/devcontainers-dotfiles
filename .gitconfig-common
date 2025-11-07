@@ -11,12 +11,12 @@
     tool = vimdiff
 [alias]
     di = diff --patience
-    do = diff --patience origin/main --
-    don = diff --name-status origin/main
     get-tracking-remote = !git config branch.$(git name-rev --name-only HEAD).remote | awk '{printf \"%s\", (($1 == \".\") ? \"\" : ($1 \"/\"))}'
     get-tracking-branch = !basename $(git config branch.$(git name-rev --name-only HEAD).merge)
     show-tracking = !echo \"$(git get-tracking-remote)$(git get-tracking-branch)\"
     diff-tracking = !git di $(git show-tracking) HEAD
+    do = !git di $(git show-tracking) --
+    don = diff --name-status $(git show-tracking)
     dt = !git diff-tracking
     ci = commit
     cia = commit -a
@@ -24,7 +24,7 @@
     unstage = reset HEAD --
     undo = !git reset --soft HEAD^ && git unstage
     co = checkout
-    cm = checkout main
+    cm = checkout $(git get-tracking-branch)
     c-p = cherry-pick
     st = status
     s = show --patience
@@ -38,9 +38,9 @@
     lo = log --patience
     up = pull --rebase --stat
     rbc = rebase --continue
-    squash = rebase --interactive origin/main
+    squash = rebase --interactive $(git show-tracking)
     br = branch
-    cr-diff = diff -M -U999999999 --no-color origin/main..HEAD --
+    cr-diff = diff -M -U999999999 --no-color $(git show-tracking)..HEAD --
     null-diff = diff -M -U999999999 --no-color `git log --pretty=tformat:'%H' | tail -1`..HEAD --
     last = cat-file commit HEAD
     top = !eval cd "$(pwd)/$(git rev-parse --show-cdup)" && pwd
