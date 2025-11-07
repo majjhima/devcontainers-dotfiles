@@ -1,0 +1,56 @@
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim +0
+    pager = less -FMRiX
+[color]
+    ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+[merge]
+    tool = vimdiff
+[alias]
+    di = diff --patience
+    do = diff --patience origin/main --
+    don = diff --name-status origin/main
+    get-tracking-remote = !git config branch.$(git name-rev --name-only HEAD).remote | awk '{printf \"%s\", (($1 == \".\") ? \"\" : ($1 \"/\"))}'
+    get-tracking-branch = !basename $(git config branch.$(git name-rev --name-only HEAD).merge)
+    show-tracking = !echo \"$(git get-tracking-remote)$(git get-tracking-branch)\"
+    diff-tracking = !git di $(git show-tracking) HEAD
+    dt = !git diff-tracking
+    ci = commit
+    cia = commit -a
+    ci-a = commit --amend
+    unstage = reset HEAD --
+    undo = !git reset --soft HEAD^ && git unstage
+    co = checkout
+    cm = checkout main
+    c-p = cherry-pick
+    st = status
+    s = show --patience
+    l = log --pretty=format:'%Cgreen%h %an %ad %ar%n%Cblue%B' --name-status
+    lme = !git l --author=$USER
+    ll = !git l @{upstream}..HEAD
+    l1= !git l -1
+    lp = log --pretty=format:'%Cgreen%h %an %ad %ar%n%Cblue%B' -p
+    llp = !git lp @{upstream}..HEAD
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lo = log --patience
+    up = pull --rebase --stat
+    rbc = rebase --continue
+    squash = rebase --interactive origin/main
+    br = branch
+    cr-diff = diff -M -U999999999 --no-color origin/main..HEAD --
+    null-diff = diff -M -U999999999 --no-color `git log --pretty=tformat:'%H' | tail -1`..HEAD --
+    last = cat-file commit HEAD
+    top = !eval cd "$(pwd)/$(git rev-parse --show-cdup)" && pwd
+    amend = commit --amend -C HEAD
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+[diff]
+    renames = true
+    ignore-space-change = true
+    ignore-all-space = true
+[push]
+    default = simple
+[pull]
+    rebase = true

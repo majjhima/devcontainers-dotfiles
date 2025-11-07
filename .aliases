@@ -1,0 +1,51 @@
+# ls shortcuts
+alias ls='ls --color'
+alias lf='ls -hF'
+alias ll='lf -l'
+alias la='ll -a'
+alias lad='la -d'
+
+alias diff='diff -u'
+
+# Set defaults for various commands
+alias df='df -h'
+alias grep='grep --color'
+alias tree='tree -I .git'
+
+# Other shortcuts
+alias dircounts='for d in `\ls -1`; do echo -n "$d: "; \ls -1 $d/ | wc -l; done'
+alias dusort='du -sm * | sort -n'
+alias myip='curl ifconfig.me/ip'
+alias myip2='curl curlmyip.com'
+
+# Search history and display uniq commands sorted by last time used
+fu () {
+    fc -iln -m "*$**" 1 | perl -ne '
+        BEGIN{
+            %h=();
+        }
+        my ($d,$c) = m/^([-\d]+ [:\d]+)\s+(\S.*)$/;
+        if(!$h{$c} || $d gt $h{$c}){$h{$c}=$d};
+        END{
+            foreach my $c (sort {$h{$a} cmp $h{$b}} keys %h){
+                next if $c =~ m/^f[chu] /;
+                print "$c\n";
+            }
+        }'
+}
+
+# Same as above, but prefix with the timestamp
+fh () {
+    fc -iln -m "*$**" 1 | perl -ne '
+        BEGIN{
+            %h=();
+        }
+        my ($d,$c) = m/^([-\d]+ [:\d]+)\s+(\S.*)$/;
+        if(!$h{$c} || $d gt $h{$c}){$h{$c}=$d};
+        END{
+            foreach my $c (sort {$h{$a} cmp $h{$b}} keys %h){
+                next if $c =~ m/^f[chu] /;
+                print "$h{$c}  $c\n";
+            }
+        }'
+}
