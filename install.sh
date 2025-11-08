@@ -25,6 +25,10 @@ rsync -av "$SCRIPT_DIR/" "$HOME/"
 #git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $PLUGINS_DIR/zsh-autocomplete
 #git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $PLUGINS_DIR/fast-syntax-highlighting
 
+# Initialize submodules
+cd $HOME
+git submodule update --init --recursive
+
 # Change the default shell to zsh
 sudo chsh -s "$ZSH_PATH" $USER
 
