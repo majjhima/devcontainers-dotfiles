@@ -204,7 +204,7 @@ set background=dark
 "set background=light
 "let g:solarized_termcolors=16
 "colorscheme solarized
-"colorscheme murphy
+colorscheme murphy
 "colorscheme desert
 
 if has('statusline')
