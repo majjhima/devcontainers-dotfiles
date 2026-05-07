@@ -1,5 +1,9 @@
 #!/bin/sh
 
+sudo apt -y update
+sudo apt -y dist-upgrade
+sudo apt -y --no-install-recommends install vim tmux
+
 # Check if zsh is installed and do nothing if not
 if ! command -v zsh >/dev/null 2>&1; then
   echo "zsh is not installed. Please install zsh and rerun this script."
@@ -16,10 +20,10 @@ SCRIPT_DIR=$(dirname "$(realpath "$0")")
 rsync -av "$SCRIPT_DIR/" "$HOME/"
 
 # Initialize submodules
-cd $HOME
+cd "$HOME" || exit 1
 
 # Change the default shell to zsh
-sudo chsh -s "$ZSH_PATH" $USER
+sudo chsh -s "$ZSH_PATH" "$USER"
 
 # Check if the shell was changed successfully
 if [ $? -eq 0 ]; then

@@ -59,6 +59,10 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+if [ -s "$HOME/.nvm/nvm.sh" ] ; then
+    \. "$HOME/.nvm/nvm.sh"
+fi
+
 # link the scalar and array variables with auto exporting
 if [ -n "$LD_LIBRARY_PATH" ] ; then
     typeset -xT LD_LIBRARY_PATH ld_library_path
