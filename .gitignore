@@ -3,6 +3,7 @@
 .bash*
 .bun/
 .cache/
+.cdk/
 .claude*
 .config/
 .devcontainer/.*Marker
@@ -16,6 +17,7 @@ dotfiles/
 .lesshst
 .local/
 .npm/
+.nvm/
 .oh-my-zsh/
 .profile
 .ssh/

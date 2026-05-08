@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "agent-zero": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Agent Zero",
+      "options": {
+        "baseURL": "https://llm.agent-zero.ai/v1"
+      },
+      "models": {
+        "kimi-k2-6": {
+          "name": "Kimi K2.6"
+        },
+        "google-gemma-4-31b-it": {
+          "name": "Google Gemma 4 31B Instruct"
+        }
+      }
+    }
+  },
+  "model": "agent-zero/kimi-k2-6",
+  "small_model": "agent-zero/google-gemma-4-31b-it",
+  "mcp": {
+    "aws": {
+      "type": "local",
+      "enabled": true,
+      "command": [
+        "uvx",
+        "mcp-proxy-for-aws@latest",
+        "https://aws-mcp.us-east-1.api.aws/mcp",
+        "--metadata",
+        "AWS_REGION=us-west-2"
+      ],
+      "environment": {
+        "AWS_PROFILE": "default"
+      }
+    }
+  }
+}
