@@ -33,3 +33,6 @@ else
   echo "Failed to change the default shell."
   exit 1
 fi
+
+# Start a detached tmux session
+tmux new -s vscode -d
