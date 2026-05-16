@@ -18,8 +18,8 @@ rsync -av "$SCRIPT_DIR/" "$HOME/"
 sudo chsh -s "$ZSH_PATH" "$USER"
 
 # Opencode base config
-OPENCODE_DIR="${HOME}/.config/opencode"
-rsync -av "$SCRIPT_DIR/.devcontainer/opencode" "$OPENCODE_DIR"
+OPENCODE_DIR="${HOME}/.config/opencode/"
+rsync -av "$SCRIPT_DIR/.devcontainer/opencode/" "$OPENCODE_DIR"
 
 # Start a detached tmux session
 tmux new -s vscode -d
