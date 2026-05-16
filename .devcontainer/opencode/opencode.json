@@ -1,0 +1,30 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "agent-zero": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Agent Zero",
+      "options": {
+        "baseURL": "https://llm.agent-zero.ai/v1"
+      },
+      "models": {
+        "google-gemma-4-31b-it": {
+          "name": "Google Gemma 4 31B Instruct",
+          "limit": {
+            "context": 256000,
+            "output": 8192
+          }
+        },
+        "kimi-k2-6": {
+          "name": "Kimi K2.6",
+          "limit": {
+            "context": 256000,
+            "output": 65536
+          }
+        }
+      }
+    }
+  },
+  "model": "agent-zero/kimi-k2-6",
+  "small_model": "agent-zero/google-gemma-4-31b-it"
+}
