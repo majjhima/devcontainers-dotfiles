@@ -33,4 +33,5 @@ tmp/
 .wget-hsts
 .zcompdump*
 .zsh_history*
+.zshenv-*
 .zprofile
