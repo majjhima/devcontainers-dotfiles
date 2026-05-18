@@ -71,7 +71,7 @@ async function main(): Promise<void> {
     command: [
       "uvx",
       "mcp-proxy-for-aws@latest",
-      `https://aws-mcp.${region}.api.aws/mcp`,
+      `https://aws-mcp.us-east-1.api.aws/mcp`,
       "--metadata",
       `AWS_REGION=${region}`,
     ],
