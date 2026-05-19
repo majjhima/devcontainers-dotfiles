@@ -13,13 +13,13 @@
  *   AWS_PROFILE  — defaults to "default"
  */
 
-import { readFile, writeFile } from "node:fs/promises";
-import { homedir } from "node:os";
-import { resolve } from "node:path";
+import { readFile, writeFile } from 'node:fs/promises';
+import { homedir } from 'node:os';
+import { resolve } from 'node:path';
 
-const DEFAULT_CONFIG_PATH = resolve(homedir(), ".config/opencode/opencode.json");
-const DEFAULT_REGION = "us-east-1";
-const DEFAULT_PROFILE = "default";
+const DEFAULT_CONFIG_PATH = resolve(homedir(), '.config/opencode/opencode.json');
+const DEFAULT_REGION = 'us-east-1';
+const DEFAULT_PROFILE = 'default';
 
 interface MCPConfig {
   type: string;
@@ -38,21 +38,18 @@ interface OpenCodeConfig {
 }
 
 async function readConfig(configPath: string): Promise<OpenCodeConfig> {
-  const content = await readFile(configPath, "utf8");
+  const content = await readFile(configPath, 'utf8');
   return JSON.parse(content) as OpenCodeConfig;
 }
 
-async function writeConfig(
-  configPath: string,
-  config: OpenCodeConfig
-): Promise<void> {
-  await writeFile(configPath, JSON.stringify(config, null, 2) + "\n");
+async function writeConfig(configPath: string, config: OpenCodeConfig): Promise<void> {
+  await writeFile(configPath, JSON.stringify(config, null, 2) + '\n');
 }
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
-  const dryRun = args.includes("--dry-run");
-  const configFlag = args.find((_, i) => args[i - 1] === "--config");
+  const dryRun = args.includes('--dry-run');
+  const configFlag = args.find((_, i) => args[i - 1] === '--config');
   const configPath = configFlag ? resolve(configFlag) : DEFAULT_CONFIG_PATH;
 
   const region = process.env.AWS_REGION || DEFAULT_REGION;
@@ -66,13 +63,13 @@ async function main(): Promise<void> {
   }
 
   const awsMcp: MCPConfig = {
-    type: "local",
+    type: 'local',
     enabled: true,
     command: [
-      "uvx",
-      "mcp-proxy-for-aws@latest",
+      'uvx',
+      'mcp-proxy-for-aws@latest',
       `https://aws-mcp.us-east-1.api.aws/mcp`,
-      "--metadata",
+      '--metadata',
       `AWS_REGION=${region}`,
     ],
     environment: {
@@ -83,10 +80,10 @@ async function main(): Promise<void> {
   config.mcp.aws = awsMcp;
 
   if (dryRun) {
-    console.log("\n--- DRY RUN ---");
+    console.log('\n--- DRY RUN ---');
     console.log(JSON.stringify({ mcp: { aws: awsMcp } }, null, 2));
-    console.log("---------------\n");
-    console.log("Config NOT written (dry-run mode).");
+    console.log('---------------\n');
+    console.log('Config NOT written (dry-run mode).');
     return;
   }
 
@@ -99,9 +96,9 @@ async function main(): Promise<void> {
   const verify = await readConfig(configPath);
   const verifyAws = verify.mcp?.aws;
   if (!verifyAws) {
-    throw new Error("Verification failed: mcp.aws block missing after write.");
+    throw new Error('Verification failed: mcp.aws block missing after write.');
   }
-  console.log("Config verified successfully.");
+  console.log('Config verified successfully.');
 }
 
 main().catch((err) => {

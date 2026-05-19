@@ -125,3 +125,10 @@ zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
+
+# bun
+if [ -d "$HOME/.bun" ]; then
+    source "/home/vscode/.bun/_bun"
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+fi

@@ -26,5 +26,6 @@
     }
   },
   "model": "agent-zero/kimi-k2-6",
-  "small_model": "agent-zero/google-gemma-4-31b-it"
+  "small_model": "agent-zero/google-gemma-4-31b-it",
+  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]
 }
