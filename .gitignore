@@ -1,4 +1,5 @@
 .*~
+/archive/
 /.aws/
 /.bash*
 /.bun/
@@ -9,11 +10,14 @@
 /.devcontainer/.*Marker
 /dotfiles/
 /.dotnet/
+**/.env
 /.gemini
+/git/
 /.gitconfig
 /.gnupg/
 /.java/
 /.keychain/
+/.kilocode/
 /.lesshst
 /.local/
 /.npm/
