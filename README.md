@@ -24,4 +24,9 @@ Enable the AWS MCP server
 ~/.config/opencode/tools/enable-aws-mcp.ts
 ```
 
+Login to aws with sso
+```
+aws sso login
+```
+
 Run `opencode`, then `/connect` to provide the api key for Agent Zero or other provider.  This repo contains config for the agent-zero token service.
